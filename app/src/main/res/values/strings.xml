@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">DiceBattle</string>
+    <string name="student_name_ahamed_almaz_numan_niit_id_20211245">Student name- Ahamed Almaz Numan\nIIT Id- 20211245</string>
+    <string name="new_game">New Game</string>
+    <string name="about">About</string>
+    <string name="Name">Almaz Numan</string>
+    <string name="IIT_no">20211245</string>
+    <string name="plagarism">I confirm that I understand what plagiarism is and have read and understood the section on Assessment Offences in the Essential Information for Students. The work that I have submitted is entirely my own. Any work from other authors is duly referenced and acknowledged.</string>
+    <string name="throwdice">Throw</string>
+    <string name="score">Score</string>
+</resources>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/gamewincount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif-black"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            tools:text="H: 10 | CPU: 5">
+        </TextView>
+
+        <TextView
+            android:id="@+id/scoretext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:textSize="15dp"
+            android:fontFamily="sans-serif-black"
+            tools:text="Score"
+            android:textColor="@color/white"
+            android:layout_marginEnd="20dp">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/lolz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toTopOf="@id/buttonlayout"
+            tools:ignore="MissingConstraints">
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/playertext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="sans-serif-black"
+                android:text="Human"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                app:layout_constraintStart_toStartOf="@id/dicelayout"
+                app:layout_constraintEnd_toEndOf="@id/dicelayout"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cputext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="sans-serif-black"
+                android:text="CPU"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                app:layout_constraintEnd_toEndOf="@id/cpudicelayout"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@id/cpudicelayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dicelayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="75dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/playertext"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="75sp"
+                    android:layout_height="75sp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginBottom="50dp"
+                    android:contentDescription="Dice1"
+                    android:src="@drawable/empty_dice" />
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="75sp"
+                    android:scaleType="centerCrop"
+                    android:layout_height="75sp"
+                    android:layout_margin="7sp"
+                    android:contentDescription="Dice2"
+                    android:src="@drawable/empty_dice"
+                    app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="75sp"
+                    android:layout_height="75sp"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="7sp"
+                    android:contentDescription="Dice3"
+                    android:src="@drawable/empty_dice"
+                    app:layout_constraintTop_toBottomOf="@id/imageView1" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="75sp"
+                    android:scaleType="centerCrop"
+                    android:layout_height="75sp"
+                    android:layout_margin="7sp"
+                    android:contentDescription="Dice4"
+                    android:src="@drawable/empty_dice"
+                    app:layout_constraintTop_toBottomOf="@id/imageView2" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:scaleType="centerCrop"
+                    android:layout_width="75sp"
+                    android:layout_height="75sp"
+                    android:layout_margin="7sp"
+                    android:contentDescription="Dice5"
+                    android:src="@drawable/empty_dice"
+                    app:layout_constraintTop_toBottomOf="@id/imageView3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cpudicelayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginBottom="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/playertext"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/cpuimageView"
+                    android:layout_width="75sp"
+                    android:layout_height="75sp"
+                    android:scaleType="centerCrop"
+                    android:layout_marginBottom="50dp"
+                    android:contentDescription="Dice1"
+                    android:src="@drawable/empty_dice" />
+
+                <ImageView
+                    android:id="@+id/cpuimageView1"
+                    android:layout_width="75sp"
+                    android:layout_height="75sp"
+                    android:layout_margin="7sp"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Dice2"
+                    android:src="@drawable/empty_dice"
+                    app:layout_constraintTop_toBottomOf="@id/cpuimageView" />
+
+                <ImageView
+                    android:id="@+id/cpuimageView2"
+                    android:layout_width="75sp"
+                    android:layout_height="75sp"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="7sp"
+                    android:contentDescription="Dice3"
+                    android:src="@drawable/empty_dice"
+                    app:layout_constraintTop_toBottomOf="@id/cpuimageView1" />
+
+                <ImageView
+                    android:id="@+id/cpuimageView3"
+                    android:layout_width="75sp"
+                    android:layout_height="75sp"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="7sp"
+                    android:contentDescription="Dice4"
+                    android:src="@drawable/empty_dice"
+                    app:layout_constraintTop_toBottomOf="@id/cpuimageView2" />
+
+                <ImageView
+                    android:id="@+id/cpuimageView4"
+                    android:layout_width="75sp"
+                    android:scaleType="centerCrop"
+                    android:layout_height="75sp"
+                    android:layout_margin="7sp"
+                    android:contentDescription="Dice5"
+                    android:src="@drawable/empty_dice"
+                    app:layout_constraintTop_toBottomOf="@id/cpuimageView3" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/buttonlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/throwbutton"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/pill_shape"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/throwdice"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                tools:ignore="MissingConstraints" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/scorebutton"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:background="@drawable/pill_shape"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/score"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintStart_toEndOf="@id/throwbutton"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/buttonlayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="15dp"
+            android:gravity="center_horizontal"
+            android:text="Dices can be indiviually selected to\nnot be re-rolled">
+        </TextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

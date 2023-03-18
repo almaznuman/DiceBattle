@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="360dp"
+    android:layout_height="250dp"
+    android:background="#1E1E1E"
+    android:padding="5dp"
+    android:layout_gravity="center"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Rules of the game"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+
+
+    <TextView
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+</LinearLayout>
