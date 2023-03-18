@@ -10,14 +10,11 @@ import kotlin.concurrent.schedule
 
 class Popups// Public, no-argument constructor required by the system
     () : DialogFragment() {
-
     private var layoutId: Int = 0
     private var delay: Long? = null
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(layoutId, container, false)
     }
-
     override fun onStart() {
         super.onStart()
         val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
@@ -28,7 +25,6 @@ class Popups// Public, no-argument constructor required by the system
             }
         }
     }
-
     companion object {
         private const val ARG_LAYOUT_ID = "layout_id"
 
@@ -40,7 +36,6 @@ class Popups// Public, no-argument constructor required by the system
             return popup
         }
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         savedInstanceState?.let {
@@ -50,7 +45,6 @@ class Popups// Public, no-argument constructor required by the system
             layoutId = it.getInt(ARG_LAYOUT_ID)
         }
     }
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(ARG_LAYOUT_ID, layoutId)
