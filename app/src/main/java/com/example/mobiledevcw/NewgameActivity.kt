@@ -42,6 +42,7 @@ class NewgameActivity: AppCompatActivity() {
     private var flagg:Boolean = false
     private var playerroll=0
     private var gamemode=0
+    private var cpureroll=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -278,10 +279,9 @@ class NewgameActivity: AppCompatActivity() {
         }
     }
     private fun advancecpu(){
-        var cpureroll=0
         val Dices = setOf(cpudice1,cpudice2,cpudice3,cpudice4,cpudice5)
         if (cputotal<playertotal) {
-            while (cpureroll <= 2) {
+            while (cpureroll < 2) {
                 for (dice in Dices) {
                     val anim = ObjectAnimator.ofFloat(dice, "rotationY", 0f, 360f)
                     anim.duration = 500 // Set the duration of the animation in milliseconds
@@ -295,12 +295,14 @@ class NewgameActivity: AppCompatActivity() {
                 }
                 cpureroll++
             }
+            cpureroll=0
         }
     }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("difficulty", gamemode)
         outState.putInt("playerroll", playerroll)
+        outState.putInt("cpureroll", cpureroll)
         outState.putInt("playerwin", playerwincount)
         outState.putInt("cpuwin", cpuwincount)
         outState.putInt("playerscore", playertotal)
@@ -321,6 +323,7 @@ class NewgameActivity: AppCompatActivity() {
     }
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
+        cpureroll=savedInstanceState.getInt("cpureroll")
         gamemode=savedInstanceState.getInt("difficulty")
         playerroll=savedInstanceState.getInt("playerroll")
         playerwincount = savedInstanceState.getInt("playerwin")
