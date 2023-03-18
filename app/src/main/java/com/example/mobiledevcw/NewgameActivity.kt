@@ -310,6 +310,7 @@ class NewgameActivity: AppCompatActivity() {
         outState.putInt("pcurrentroll", playercurrentroll)
         outState.putInt("ccurrentroll", cpucurrentroll)
         outState.putInt("target", targetvalue)
+        outState.putString("tag",throwButton.text.toString())
         outState.putInt("dice1", dice1.getTag() as Int)
         outState.putInt("dice2", dice2.getTag() as Int)
         outState.putInt("dice3", dice3.getTag() as Int)
@@ -326,6 +327,7 @@ class NewgameActivity: AppCompatActivity() {
         cpureroll=savedInstanceState.getInt("cpureroll")
         gamemode=savedInstanceState.getInt("difficulty")
         playerroll=savedInstanceState.getInt("playerroll")
+        throwButton.text=savedInstanceState.getString("tag")
         playerwincount = savedInstanceState.getInt("playerwin")
         cpuwincount = savedInstanceState.getInt("cpuwin")
         gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
