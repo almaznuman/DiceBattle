@@ -341,8 +341,8 @@ class NewgameActivity: AppCompatActivity() {
     }
 
     /**
-     * advanced cpu- the cpu compares it current roll against the player's previous average scores and a buffer () is added if the score is lower than 15 to give the cpu a better dice average to compete
-     * since the intial throw is considered as players current roll, we do an effiecnt reroll for the dices below 3 with hopes in minimize the dice round loss
+     * advanced cpu- the cpu compares it current roll against the player's previous average scores and a buffer assigned as if the score is lower than 15 to give the cpu a better dice average to compete against,
+     * since the intial throw is considered as players current roll, we do an effiecnt re-roll for the dices below 3 with hopes in minimizing the dice round loss,
      * after the intial throw we compare the cpu current dice values against the average of the players previous score (with or without buffer increase)
      * This provides a more competitive experience to the player compared to the random re-roll strategy
      */
