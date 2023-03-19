@@ -66,7 +66,6 @@ class NewgameActivity: AppCompatActivity() {
 
         /**
          *Intializing variables by assigning ID's
-         *
          */
 
         throwButton=findViewById(R.id.throwbutton)
@@ -285,7 +284,7 @@ class NewgameActivity: AppCompatActivity() {
     }
 
     /**
-     * "the cpu's strategy involves generating random numbers to determine whether to re-roll and how many times to do so. The random number generator can produce 0, 1, or 2. If the generator produces 0, the cpu does not re-roll. If it produces 1 or 2, the cpu randomly decides whether to re-roll and how many times to do so."
+     * "the randomstrategyreroll involves generating random numbers to determine whether to re-roll and how many times to do so. The random number generator can produce 0, 1, or 2. If the generator produces 0, the cpu does not re-roll. If it produces 1 or 2, the cpu randomly decides whether to re-roll and how many times to do so."
      */
 
     private fun randomstrategyreroll(){
@@ -305,7 +304,7 @@ class NewgameActivity: AppCompatActivity() {
 
     /**
      * Function used to find the winner of the game, by comparing player and cpu scores with
-     * the target value. also checks whether theres a draw or not
+     * the target value, also checks whether there's a draw or not
      */
     private fun checkwinner(){
         if(playertotal>=targetvalue && playertotal>cputotal){
@@ -344,7 +343,8 @@ class NewgameActivity: AppCompatActivity() {
      * advanced cpu- the cpu compares it current roll against the player's previous average scores and a buffer assigned as if the score is lower than 15 to give the cpu a better dice average to compete against,
      * since the intial throw is considered as players current roll, we do an effiecnt re-roll for the dices below 3 with hopes in minimizing the dice round loss,
      * after the intial throw we compare the cpu current dice values against the average of the players previous score (with or without buffer increase)
-     * This provides a more competitive experience to the player compared to the random re-roll strategy
+     * This provides a more competitive experience to the player compared to the random re-roll strategy, there a very less disadvantages since the damage is limit to
+     * the cpu's next roll if the players previous dice average is lower than 15 (cpu dices will be re-rolled if lower than 3)
      */
     private fun advancecpu(){
         val Dices = setOf(cpudice1,cpudice2,cpudice3,cpudice4,cpudice5)
