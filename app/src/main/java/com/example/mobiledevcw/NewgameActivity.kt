@@ -92,7 +92,7 @@ class NewgameActivity: AppCompatActivity() {
                 cputotal+=cpucurrentroll
                 scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
                 playerroll=0
-                countTextView.text="Human Current Roll: $playercurrentroll"
+                countTextView.text="Score Updated!"
                 checkwinner()
                 playercurrentroll=0
                 cpucurrentroll=0
@@ -112,8 +112,7 @@ class NewgameActivity: AppCompatActivity() {
                     advancecpu()
                 }
                 cputotal+=cpucurrentroll
-                scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
-                countTextView.text="Human Current Roll: $playercurrentroll"
+                countTextView.text="Score Updated!"
                 checkwinner()
                 playercurrentroll=0
                 cpucurrentroll=0
@@ -403,7 +402,7 @@ class NewgameActivity: AppCompatActivity() {
         cpudice4.alpha=a
         cpudice5.alpha=a
         if (a==0.0f) {
-            countTextView.text = "The game has end, head back to the main screen"
+            countTextView.text = "The game has ended, head back to the main screen"
         }
     }
 }
