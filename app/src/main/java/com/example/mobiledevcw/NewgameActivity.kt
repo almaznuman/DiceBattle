@@ -367,8 +367,8 @@ class NewgameActivity: AppCompatActivity() {
             cpureroll=0
         }else if(attemptstaken!=0){
             var buffer = previousscore/attemptstaken
-            if(buffer<=15){
-                buffer+=5
+            if(buffer<15){
+                buffer=15
             }
             var averageofdice=buffer/5
             while (cpureroll<2) {
@@ -376,7 +376,7 @@ class NewgameActivity: AppCompatActivity() {
                     val anim = ObjectAnimator.ofFloat(dice, "rotationY", 0f, 720f)
                     anim.duration = 750
                     val backgroundImageName: String = java.lang.String.valueOf(dice.getTag())
-                    if (backgroundImageName.toFloat() < averageofdice) {
+                    if (backgroundImageName.toInt() < averageofdice) {
                         cpucurrentroll -= backgroundImageName.toInt()
                         val b = cpudiceroll(dice)
                         cpucurrentroll += b
