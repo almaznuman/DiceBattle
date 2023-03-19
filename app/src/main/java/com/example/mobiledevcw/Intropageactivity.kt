@@ -17,6 +17,9 @@ class Intropageactivity:AppCompatActivity() {
         setContentView(R.layout.introscreen)
         val getstartedbutton:Button=findViewById(R.id.getstartted)
         val i = Intent(this,MainActivity::class.java)
+        /**
+         *Get started button functions
+         */
         getstartedbutton.setOnClickListener(){
             it.startAnimation(buttonClick)
             startActivity(i)
