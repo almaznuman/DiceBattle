@@ -68,7 +68,6 @@ class NewgameActivity: AppCompatActivity() {
         scoreTextView=findViewById(R.id.scoretext)
         scorebutton=findViewById(R.id.scorebutton)
         gamewincount=findViewById(R.id.gamewincount)
-
         scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
         gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
         disbaledices(isdicesenabled)
