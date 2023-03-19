@@ -66,7 +66,7 @@ class NewgameActivity: AppCompatActivity() {
         cpudice3=findViewById(R.id.cpuimageView2)
         cpudice4=findViewById(R.id.cpuimageView3)
         cpudice5=findViewById(R.id.cpuimageView4)
-        countTextView=findViewById(R.id.lolz)
+        countTextView=findViewById(R.id.currentrolltext)
         scoreTextView=findViewById(R.id.scoretext)
         scorebutton=findViewById(R.id.scorebutton)
         gamewincount=findViewById(R.id.gamewincount)
@@ -95,7 +95,7 @@ class NewgameActivity: AppCompatActivity() {
                 cputotal+=cpucurrentroll
                 scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
                 playerroll=0
-                countTextView.text="Human current Roll: $playercurrentroll"
+                countTextView.text="Human Current Roll: $playercurrentroll"
                 checkwinner()
                 playercurrentroll=0
                 cpucurrentroll=0
@@ -116,7 +116,7 @@ class NewgameActivity: AppCompatActivity() {
                 }
                 cputotal+=cpucurrentroll
                 scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
-                countTextView.text="Human current Roll: $playercurrentroll"
+                countTextView.text="Human Current Roll: $playercurrentroll"
                 checkwinner()
                 playercurrentroll=0
                 cpucurrentroll=0
@@ -154,7 +154,7 @@ class NewgameActivity: AppCompatActivity() {
     }
     private fun total(a:Int,b:Int) {
         playercurrentroll=a+b
-        countTextView.text = "Human current Roll: $playercurrentroll"
+        countTextView.text = "Human Current Roll: $playercurrentroll"
 
     }
 

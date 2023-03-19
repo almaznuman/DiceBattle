@@ -40,7 +40,7 @@
         </TextView>
 
         <TextView
-            android:id="@+id/lolz"
+            android:id="@+id/currentrolltext"
             android:gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
