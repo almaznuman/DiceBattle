@@ -394,7 +394,7 @@ class NewgameActivity: AppCompatActivity() {
         }else if(attemptstaken!=0){
             var buffer = previousscore/attemptstaken
             if(buffer<15){
-                buffer=15
+                buffer+=5
             }
             var averageofdice=buffer/5
             while (cpureroll<2) {
