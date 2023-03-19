@@ -8,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 
 class Intropageactivity:AppCompatActivity() {
 
-    //introscreen
+    /**
+     * button animations
+     */
     private val buttonClick = AlphaAnimation(1f, 0.8f)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

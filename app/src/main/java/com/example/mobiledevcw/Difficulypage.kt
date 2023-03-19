@@ -34,7 +34,7 @@ class Difficulypage:AppCompatActivity() {
         val easy = findViewById<CardView>(R.id.card1)
         val hard = findViewById<CardView>(R.id.card2)
         /**
-         * Cardview on click listeners
+         * Cardview on-click listeners
          */
         easy.setOnClickListener(){
             it.startAnimation(buttonClick)
@@ -80,6 +80,9 @@ class Difficulypage:AppCompatActivity() {
         }
     }
 
+    /**
+     * Function to pass intended game-mode and previous scores
+     */
     private fun handleNumber(number: Int,tag:String) {
         val intent = Intent(this, NewgameActivity::class.java)
         intent.putExtra("number", number)
@@ -91,6 +94,10 @@ class Difficulypage:AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    /**
+     * save and recreate activity functions
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString("Tag",Tag.toString())
