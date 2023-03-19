@@ -54,6 +54,7 @@ class NewgameActivity: AppCompatActivity() {
     private var dicevisibility=1.0f
     private var attempts=0
     private var previousscore=0
+    private var myList = mutableListOf(false,false,false,false,false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,11 +95,11 @@ class NewgameActivity: AppCompatActivity() {
         gameendfunc(dicevisibility)
 
         throwButton.setOnClickListener(){
+            myList.fill(false)// reseting the selected dice
             disbaledices(isdicesenabled)
             it.startAnimation(buttonClick)
             throwButton.text="Re-Roll"     // changing the throwbutton text from "throw" to "re-roll"
             flagg=true                     // enabling dices to be individually selected to prevent said dice from being re-rolled
-
             rollplayerdice()               // rolls player dices
             cpudiceroll() // rolls cpu dices
             if (draw==true){
@@ -123,7 +124,8 @@ class NewgameActivity: AppCompatActivity() {
                     advancecpu() // cpu uses an efficient algorithm for re-rolls
                 }
                 cputotal+=cpucurrentroll
-                scoreTextView.text="Score- P: $playertotal | CPU: $cputotal" //updating scores
+                scoreTextView.text="Score- P: $playertotal | CPU: $cputotal"
+                //updating scores
                 playerroll=0
                 countTextView.text="Score Updated!"
                 checkwinner()
@@ -154,18 +156,18 @@ class NewgameActivity: AppCompatActivity() {
                 cpucurrentroll=0
                 playerroll=0
                 flagg=false
+                selectedDice.clear()
             }
         }
-        dice1.setOnClickListener { selectDice(dice1) }//setting onclicklisteners to selectdice function
-        dice2.setOnClickListener { selectDice(dice2) }
-        dice3.setOnClickListener { selectDice(dice3) }
-        dice4.setOnClickListener { selectDice(dice4) }
-        dice5.setOnClickListener { selectDice(dice5) }
+        dice1.setOnClickListener { selectDice(dice1,"dice1") }//setting onclicklisteners to selectdice function
+        dice2.setOnClickListener { selectDice(dice2,"dice2") }
+        dice3.setOnClickListener { selectDice(dice3,"dice3") }
+        dice4.setOnClickListener { selectDice(dice4,"dice4") }
+        dice5.setOnClickListener { selectDice(dice5,"dice5") }
     }
     /**
      * overriding onBackPressed to use the native(androids) back button to be directed back to the main menu through intent
      */
-
     override fun onBackPressed() {
         super.onBackPressed()
         val intent = Intent(this,MainActivity::class.java)
@@ -234,15 +236,39 @@ class NewgameActivity: AppCompatActivity() {
      * for the player re-roll function, when an indiviudal dice is selected through the image onclicklistener, the image is added to a set where the dices in the list will be excluded from re-rolls.
      * Dices are also reduced in opacity so that the user can visually see which dice has been selected
      */
-    private fun selectDice(dice: ImageView) {
+    private fun selectDice(dice: ImageView,dicename:String) {
         if (selectedDice.contains(dice)) {
             selectedDice.remove(dice)
+            if (dicename=="dice1"){
+                myList[0]=false
+            }else if (dicename=="dice2"){
+                myList[1]=false
+            }else if (dicename=="dice3"){
+                myList[2]=false
+            }else if (dicename=="dice4"){
+                myList[3]=false
+            }else if (dicename=="dice5"){
+                myList[4]=false
+            }
             dice.alpha = 1.0f
         } else {
             selectedDice.add(dice)
+            if (dicename=="dice1"){
+                myList[0]=true
+            }else if (dicename=="dice2"){
+                myList[1]=true
+            }else if (dicename=="dice3"){
+                myList[2]=true
+            }else if (dicename=="dice4"){
+                myList[3]=true
+            }else if (dicename=="dice5"){
+                myList[4]=true
+            }
+
             dice.alpha = 0.5f
         }
     }
+
 
     /**
      * rollplayerdice function takes the dices that were selected and compares it against a set of all player dices, it then takes the remaining unselected dice and performs a roll on them
@@ -394,6 +420,7 @@ class NewgameActivity: AppCompatActivity() {
      */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        outState.putBooleanArray("selectdice",myList.toBooleanArray())
         outState.putString("currentrolltext", countTextView.text.toString())
         outState.putInt("difficulty", gamemode)
         outState.putInt("playerroll", playerroll)
@@ -446,6 +473,7 @@ class NewgameActivity: AppCompatActivity() {
         countTextView.text = savedInstanceState.getString("currentrolltext")
         cpucurrentroll= savedInstanceState.getInt("ccurrentroll")
         targetvalue=savedInstanceState.getInt("target")
+        myList=savedInstanceState.getBooleanArray("selectdice")?.toMutableList()?:myList
         restoredice(dice1,savedInstanceState.getInt("dice1"))
         restoredice(dice2,savedInstanceState.getInt("dice2"))
         restoredice(dice3,savedInstanceState.getInt("dice3"))
@@ -456,12 +484,27 @@ class NewgameActivity: AppCompatActivity() {
         restoredice(cpudice3,savedInstanceState.getInt("cpudice3"))
         restoredice(cpudice4,savedInstanceState.getInt("cpudice4"))
         restoredice(cpudice5,savedInstanceState.getInt("cpudice5"))
+        selectedDice1(myList,0,dice1)
+        selectedDice1(myList,1,dice2)
+        selectedDice1(myList,2,dice3)
+        selectedDice1(myList,3,dice4)
+        selectedDice1(myList,4,dice5)
+    }
+
+    private fun selectedDice1(myList: MutableList<Boolean>, i: Int, dice1: ImageView) {
+        if (myList[i]==false) {
+            selectedDice.remove(dice1)
+            dice1.alpha = 1.0f
+        } else if(myList[i]==true) {
+            selectedDice.add(dice1)
+            dice1.alpha = 0.5f
+        }
     }
 
     /**
      * Function used to restore the state of dices
      */
-    private fun restoredice(dice:ImageView,tag:Int){
+    private fun restoredice(dice:ImageView, tag:Int){
         val drawableResource = when (tag) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
@@ -488,7 +531,6 @@ class NewgameActivity: AppCompatActivity() {
         throwButton.isEnabled=a
         scorebutton.isEnabled=a
     }
-
     /**
      * Function that makes all dices disappear and shows the endgame text
      */
