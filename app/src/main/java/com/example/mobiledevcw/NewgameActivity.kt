@@ -52,6 +52,8 @@ class NewgameActivity: AppCompatActivity() {
     private var isdicesenabled=true
     private var draw=false
     private var dicevisibility=1.0f
+    private var attempts=0
+    private var previousscore=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,10 +115,12 @@ class NewgameActivity: AppCompatActivity() {
                 throwButton.text="Throw"
             } else if (playerroll==3){
                 disbaledices(false)//disabling dices onclick listeners
+                previousscore=playertotal
                 playertotal+=playercurrentroll
                 if (gamemode==1) { // obtained from difficulty pagee through intent
                     randomstrategyreroll()// cpu uses random re-roll strategy
                 }else {
+                    attempts++
                     advancecpu() // cpu uses an efficient algorithm for re-rolls
                 }
                 cputotal+=cpucurrentroll
@@ -135,10 +139,12 @@ class NewgameActivity: AppCompatActivity() {
                 it.startAnimation(buttonClick)
                 disbaledices(false)
                 throwButton.text="Throw"
+                previousscore=playertotal
                 playertotal+=playercurrentroll
                 if (gamemode==1) {
                     randomstrategyreroll()
                 }else {
+                    attempts++
                     advancecpu()
                 }
                 cputotal+=cpucurrentroll
@@ -167,6 +173,7 @@ class NewgameActivity: AppCompatActivity() {
         intent.putExtra("player",playerwincount)
         intent.putExtra("cpu",cpuwincount)
         startActivity(intent)
+        finish()
     }
 
     /**
@@ -332,17 +339,39 @@ class NewgameActivity: AppCompatActivity() {
     }
 
     /**
-     * advanced cpu-
+     * advanced cpu- the cpu compares it current roll against the player's previous score and get the average per dice
      */
     private fun advancecpu(){
         val Dices = setOf(cpudice1,cpudice2,cpudice3,cpudice4,cpudice5)
-        if (cpucurrentroll<playertotal) {
-            while (cpureroll < 2) {
+        val a= attempts-1
+        if (a==0){
+            while (cpureroll<2) {
                 for (dice in Dices) {
                     val anim = ObjectAnimator.ofFloat(dice, "rotationY", 0f, 720f)
                     anim.duration = 750
                     val backgroundImageName: String = java.lang.String.valueOf(dice.getTag())
                     if (backgroundImageName.toInt() < 3) {
+                        cpucurrentroll -= backgroundImageName.toInt()
+                        val b = cpudiceroll(dice)
+                        cpucurrentroll += b
+                        anim.start()
+                    }
+                }
+                cpureroll++
+            }
+            cpureroll=0
+        }else if(a!=0){
+            var b = previousscore/a
+            if(b<15){
+                b+=10
+            }
+            var averageofdice=b/5
+            while (cpureroll<2) {
+                for (dice in Dices) {
+                    val anim = ObjectAnimator.ofFloat(dice, "rotationY", 0f, 720f)
+                    anim.duration = 750
+                    val backgroundImageName: String = java.lang.String.valueOf(dice.getTag())
+                    if (backgroundImageName.toFloat() < averageofdice) {
                         cpucurrentroll -= backgroundImageName.toInt()
                         val b = cpudiceroll(dice)
                         cpucurrentroll += b
@@ -386,9 +415,11 @@ class NewgameActivity: AppCompatActivity() {
         outState.putBoolean("diceenabled",isdicesenabled)
         outState.putFloat("dicevisible",dicevisibility)
         outState.putBoolean("draw",draw)
+        outState.putInt("attempts",attempts)
     }
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
+        attempts=savedInstanceState.getInt("attempts")
         draw=savedInstanceState.getBoolean("draw")
         dicevisibility=savedInstanceState.getFloat("dicevisible")
         isbuttonenabled=savedInstanceState.getBoolean("buttonenabled")
