@@ -368,7 +368,6 @@ class NewgameActivity: AppCompatActivity() {
         restoredice(cpudice3,savedInstanceState.getInt("cpudice3"))
         restoredice(cpudice4,savedInstanceState.getInt("cpudice4"))
         restoredice(cpudice5,savedInstanceState.getInt("cpudice5"))
-
     }
     private fun restoredice(dice:ImageView,tag:Int){
         val drawableResource = when (tag) {
@@ -399,7 +398,6 @@ class NewgameActivity: AppCompatActivity() {
         dice3.alpha=a
         dice4.alpha=a
         dice5.alpha=a
-
         cpudice1.alpha=a
         cpudice2.alpha=a
         cpudice3.alpha=a

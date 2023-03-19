@@ -96,7 +96,7 @@ class Difficulypage:AppCompatActivity() {
     }
 
     /**
-     * save and recreate activity functions
+     * on save and restore overridden functions to save and restore states during orientation change
      */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)

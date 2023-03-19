@@ -5,18 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import java.util.*
-import kotlin.concurrent.schedule
 
-class Popups// Public, no-argument constructor required by the system
-    () : DialogFragment() {
+
+class Popups : DialogFragment() {
     private var layoutId: Int = 0
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(layoutId, container, false)
     }
     override fun onStart() {
         super.onStart()
-        val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
+        val width = (resources.displayMetrics.widthPixels * 0.75).toInt()
         dialog?.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
     companion object {

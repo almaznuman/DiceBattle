@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         /**
          *Intializing variables by assigning ID's
+         *
          */
 
         newgamebutton=findViewById(R.id.newgame)
@@ -50,12 +51,19 @@ class MainActivity : AppCompatActivity() {
          */
         aboutbutton.setOnClickListener{
             it.startAnimation(buttonClick)
+            /**
+             * Making an instance of pop-up by passing a layout as a parameter
+             */
             dialogact=Popups.newInstance(R.layout.about)
             dialogact.show(supportFragmentManager, "about")
 
         }
         newgamebutton.setOnClickListener{
             it.startAnimation(buttonClick)
+            /**
+             * user is directed to the difficulty page where the user can select whether the cpu uses
+             * the random strategy or advanced strategy
+             */
             val intent = Intent(this, Difficulypage::class.java)
             intent.putExtra("player",playerscore)
             intent.putExtra("cpu",cpuscore)
@@ -64,10 +72,17 @@ class MainActivity : AppCompatActivity() {
 
         rulesbutton.setOnClickListener {
             it.startAnimation(buttonClick)
+            /**
+             * Making an instance of pop-up by passing a layout as a parameter
+             */
             dialogact=Popups.newInstance(R.layout.rulepage)
             dialogact.show(supportFragmentManager, "rules")
         }
     }
+
+    /**
+     * on save and restore overridden functions to save and restore states during orientation change
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("playerscore", playerscore)
