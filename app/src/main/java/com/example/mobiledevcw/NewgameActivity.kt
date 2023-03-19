@@ -83,6 +83,10 @@ class NewgameActivity: AppCompatActivity() {
         gamewincount=findViewById(R.id.gamewincount)
         scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
         gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
+
+        /**
+         * enabling onclicklisteners when the activitu begins
+         */
         disbaledices(isdicesenabled)
         disablebuttons(isbuttonenabled)
         gameendfunc(dicevisibility)
@@ -90,17 +94,18 @@ class NewgameActivity: AppCompatActivity() {
         throwButton.setOnClickListener {
             disbaledices(isdicesenabled)
             it.startAnimation(buttonClick)
-            throwButton.text="Re-Roll"
-            flagg=true
-            rollplayerdice()
-            Dice()
+            throwButton.text="Re-Roll"     // changing the throwbutton text from "throw" to "re-roll"
+            flagg=true                     // enabling dices to be individually selected to prevent said dice from being re-rolled
+
+            rollplayerdice()               // rolls player dices
+            cpudiceroll()                  // rolls cpu dices
             if (playerroll==3){
-                disbaledices(false)
+                disbaledices(false)//disabling dices onclick listeners
                 playertotal+=playercurrentroll
-                if (gamemode==1) {
-                    randomstrategyreroll()
+                if (gamemode==1) { // obtained from difficulty pagee through intent
+                    randomstrategyreroll()// random re-roll strategy
                 }else {
-                    advancecpu()
+                    advancecpu() //
                 }
                 cputotal+=cpucurrentroll
                 scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
@@ -167,18 +172,18 @@ class NewgameActivity: AppCompatActivity() {
 
     }
 
-    private fun Dice() {
+    private fun cpudiceroll() {
         if (playerroll<=1) {
-            val cpudice1count = Dice(cpudice1)
-            val cpudice2count = Dice(cpudice2)
-            val cpudice3count = Dice(cpudice3)
-            val cpudice4count = Dice(cpudice4)
-            val cpudice5count = Dice(cpudice5)
+            val cpudice1count = cpudiceroll(cpudice1)
+            val cpudice2count = cpudiceroll(cpudice2)
+            val cpudice3count = cpudiceroll(cpudice3)
+            val cpudice4count = cpudiceroll(cpudice4)
+            val cpudice5count = cpudiceroll(cpudice5)
             total(cpudice1count, cpudice2count, cpudice3count, cpudice4count, cpudice5count)
         }
     }
 
-    private fun Dice(dice: ImageView): Int {
+    private fun cpudiceroll(dice: ImageView): Int {
         val randomNumber = Random.nextInt(1,7)
         val drawableResource = when (randomNumber) {
             1 -> R.drawable.dice_1
@@ -233,7 +238,7 @@ class NewgameActivity: AppCompatActivity() {
             }
         }
         for (dice in unselectedDice){
-            val dice1Number = Dice(dice)
+            val dice1Number = cpudiceroll(dice)
             newtotal+=dice1Number
 
         }
@@ -262,7 +267,7 @@ class NewgameActivity: AppCompatActivity() {
                 for (dice in randomElements) {
                     val backgroundImageName: String = java.lang.String.valueOf(dice.getTag())
                     cpucurrentroll -= backgroundImageName.toInt()
-                    val b = Dice(dice)
+                    val b = cpudiceroll(dice)
                     cpucurrentroll += b
                 }
             }
@@ -309,7 +314,7 @@ class NewgameActivity: AppCompatActivity() {
                     val backgroundImageName: String = java.lang.String.valueOf(dice.getTag())
                     if (backgroundImageName.toInt() < 3) {
                         cpucurrentroll -= backgroundImageName.toInt()
-                        val b = Dice(dice)
+                        val b = cpudiceroll(dice)
                         cpucurrentroll += b
                         anim.start()
                     }
