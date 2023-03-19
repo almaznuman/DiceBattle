@@ -7,6 +7,7 @@ import java.util.*
 import kotlin.concurrent.schedule
 
 class SplashScreenActivity: AppCompatActivity() {
+    //Splashscreen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.coverpage)
