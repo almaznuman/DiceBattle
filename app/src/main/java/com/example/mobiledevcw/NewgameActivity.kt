@@ -274,19 +274,16 @@ class NewgameActivity: AppCompatActivity() {
      */
 
     private fun randomstrategyreroll(){
-        val a = (0..2).random()
-        val b =(0..1).random()
+        val howmanyrerolls =(0..2).random()
         val Dices = setOf(cpudice1,cpudice2,cpudice3,cpudice4,cpudice5)
-        if (b==0) {
-            for (i in 0..a) {
-                val a = Random.nextInt(1, 7)
-                val randomElements = Dices.asSequence().shuffled().take(a).toList()
-                for (dice in randomElements) {
-                    val backgroundImageName: String = java.lang.String.valueOf(dice.getTag())
-                    cpucurrentroll -= backgroundImageName.toInt()
-                    val b = cpudiceroll(dice)
-                    cpucurrentroll += b
-                }
+        for (i in 1..howmanyrerolls) {
+            val a = Random.nextInt(1, 7)
+            val randomElements = Dices.asSequence().shuffled().take(a).toList()
+            for (dice in randomElements) {
+                val backgroundImageName: String = java.lang.String.valueOf(dice.getTag())
+                cpucurrentroll -= backgroundImageName.toInt()
+                val b = cpudiceroll(dice)
+                cpucurrentroll += b
             }
         }
     }
