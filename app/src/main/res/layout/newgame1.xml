@@ -47,7 +47,7 @@
             android:fontFamily="sans-serif-black"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:gravity="center_horizontal"
             android:layout_marginTop="50dp"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"

@@ -82,8 +82,8 @@ class NewgameActivity: AppCompatActivity() {
         scoreTextView=findViewById(R.id.scoretext)
         scorebutton=findViewById(R.id.scorebutton)
         gamewincount=findViewById(R.id.gamewincount)
-        scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
-        gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
+        scoreTextView.text="Score- P: $playertotal | CPU: $cputotal"
+        gamewincount.text="P:$playerwincount / CPU:$cpuwincount"
 
         /**
          * enabling onclicklisteners when the activitu begins
@@ -104,7 +104,7 @@ class NewgameActivity: AppCompatActivity() {
                 disbaledices(false)
                 playertotal+=playercurrentroll
                 cputotal+=cpucurrentroll
-                scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
+                scoreTextView.text="Score- P: $playertotal | CPU: $cputotal"
                 playerroll=0
                 countTextView.text="Score Updated!"
                 checkwinner()
@@ -120,7 +120,7 @@ class NewgameActivity: AppCompatActivity() {
                     advancecpu() // cpu uses an efficient algorithm for re-rolls
                 }
                 cputotal+=cpucurrentroll
-                scoreTextView.text="Score- H: $playertotal | CPU: $cputotal" //updating scores
+                scoreTextView.text="Score- P: $playertotal | CPU: $cputotal" //updating scores
                 playerroll=0
                 countTextView.text="Score Updated!"
                 checkwinner()
@@ -142,7 +142,7 @@ class NewgameActivity: AppCompatActivity() {
                     advancecpu()
                 }
                 cputotal+=cpucurrentroll
-                scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
+                scoreTextView.text="Score- P: $playertotal | CPU: $cputotal"
                 countTextView.text="Score Updated!"
                 checkwinner()
                 playercurrentroll=0
@@ -151,23 +151,12 @@ class NewgameActivity: AppCompatActivity() {
                 flagg=false
             }
         }
-        dice1.setOnClickListener {
-            selectDice(dice1)
-        }
-        dice2.setOnClickListener {
-            selectDice(dice2)
-        }
-        dice3.setOnClickListener {
-            selectDice(dice3)
-        }
-        dice4.setOnClickListener {
-            selectDice(dice4)
-        }
-        dice5.setOnClickListener {
-            selectDice(dice5)
-        }
+        dice1.setOnClickListener { selectDice(dice1) }//setting onclicklisteners to selectdice function
+        dice2.setOnClickListener { selectDice(dice2) }
+        dice3.setOnClickListener { selectDice(dice3) }
+        dice4.setOnClickListener { selectDice(dice4) }
+        dice5.setOnClickListener { selectDice(dice5) }
     }
-
     /**
      * overriding onBackPressed to use the native(androids) back button to be directed back to the main menu through intent
      */
@@ -179,16 +168,23 @@ class NewgameActivity: AppCompatActivity() {
         intent.putExtra("cpu",cpuwincount)
         startActivity(intent)
     }
+
+    /**
+     * functions for summing up the cpu and players individual dice
+     */
     private fun total(a:Int,b:Int,c:Int,d:Int,e:Int) {
         cpucurrentroll=a+b+c+d+e
 
     }
     private fun total(a:Int,b:Int) {
         playercurrentroll=a+b
-        countTextView.text = "Human Current Roll: $playercurrentroll"
+        countTextView.text = "Player Current Roll: $playercurrentroll"
 
     }
 
+    /**
+     * cpudiceroll is overloaded here with a different definition where the value of the randomly generated dice is assigned into a variable and later summed with the other dicea
+     */
     private fun cpudiceroll() {
         if (playerroll<=1) {
             val cpudice1count = cpudiceroll(cpudice1)
@@ -200,6 +196,9 @@ class NewgameActivity: AppCompatActivity() {
         }
     }
 
+    /**
+     * cpudiceroll function takes in an imageview and assigns it with a randomly generated dice side, the function also returns the value of the selected dice side
+     */
     private fun cpudiceroll(dice: ImageView): Int {
         val randomNumber = Random.nextInt(1,7)
         val drawableResource = when (randomNumber) {
@@ -212,7 +211,6 @@ class NewgameActivity: AppCompatActivity() {
         }
         val anim = ObjectAnimator.ofFloat(dice, "rotationY", 0f, 720f)
         anim.duration = 750
-
         dice.setTag(randomNumber)
         dice.setImageResource(drawableResource)
         anim.start()
@@ -224,6 +222,10 @@ class NewgameActivity: AppCompatActivity() {
         return randomNumber
     }
 
+    /**
+     * for the player re-roll function, when an indiviudal dice is selected through the image onclicklistener, the image is added to a set where the dices in the list will be excluded from re-rolls.
+     * Dices are also reduced in opacity so that the user can visually see which dice has been selected
+     */
     private fun selectDice(dice: ImageView) {
         if (selectedDice.contains(dice)) {
             selectedDice.remove(dice)
@@ -234,6 +236,11 @@ class NewgameActivity: AppCompatActivity() {
         }
     }
 
+    /**
+     * rollplayerdice function takes the dices that were selected and compares it against a set of all player dices, it then takes the remaining unselected dice and performs a roll on them
+     * in the intial throw none of the dices are selected so the roll is performed on all of the dices
+     *
+     */
     private fun rollplayerdice() {
         val unselectedDice = setOf(dice1, dice2, dice3, dice4, dice5) - selectedDice
         var newtotal=0
@@ -257,7 +264,6 @@ class NewgameActivity: AppCompatActivity() {
         for (dice in unselectedDice){
             val dice1Number = cpudiceroll(dice)
             newtotal+=dice1Number
-
         }
         total(retainvalue,newtotal)
         selectedDice.clear()
@@ -270,7 +276,7 @@ class NewgameActivity: AppCompatActivity() {
     }
 
     /**
-     * Random strategy for cpu
+     * "the cpu's strategy involves generating random numbers to determine whether to re-roll and how many times to do so. The random number generator can produce 0, 1, or 2. If the generator produces 0, the cpu does not re-roll. If it produces 1 or 2, the cpu randomly decides whether to re-roll and how many times to do so."
      */
 
     private fun randomstrategyreroll(){
@@ -288,6 +294,10 @@ class NewgameActivity: AppCompatActivity() {
         }
     }
 
+    /**
+     * Function used to find the winner of the game, by comparing player and cpu scores with
+     * the target value. also checks whether theres a draw or not
+     */
     private fun checkwinner(){
         if(playertotal>=targetvalue && playertotal>cputotal){
             dicevisibility=0.0f
@@ -296,7 +306,7 @@ class NewgameActivity: AppCompatActivity() {
             playerwincount++
             val dialogact=Popups.newInstance(R.layout.custompopup)
             dialogact.show(supportFragmentManager, "playerwin")
-            gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
+            gamewincount.text="P:$playerwincount / CPU:$cpuwincount"
             disablebuttons(isbuttonenabled)
             disbaledices(isdicesenabled)
             gameendfunc(dicevisibility)
@@ -304,11 +314,11 @@ class NewgameActivity: AppCompatActivity() {
             dicevisibility=0.0f
             isbuttonenabled=false
             isdicesenabled=false
-            gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
+            gamewincount.text="P:$playerwincount / CPU:$cpuwincount"
             cpuwincount++
             val dialogact=Popups.newInstance(R.layout.custompopup1)
             dialogact.show(supportFragmentManager, "cpuwin")
-            gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
+            gamewincount.text="P:$playerwincount / CPU:$cpuwincount"
             disablebuttons(isbuttonenabled)
             disbaledices(isdicesenabled)
             gameendfunc(dicevisibility)
@@ -317,12 +327,16 @@ class NewgameActivity: AppCompatActivity() {
             dialogact.show(supportFragmentManager, "draw")
             draw=true
             scorebutton.isEnabled=false
-            gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
+            gamewincount.text="P:$playerwincount / CPU:$cpuwincount"
         }
     }
+
+    /**
+     * advanced cpu-
+     */
     private fun advancecpu(){
         val Dices = setOf(cpudice1,cpudice2,cpudice3,cpudice4,cpudice5)
-        if (cputotal<playertotal) {
+        if (cpucurrentroll<playertotal) {
             while (cpureroll < 2) {
                 for (dice in Dices) {
                     val anim = ObjectAnimator.ofFloat(dice, "rotationY", 0f, 720f)
@@ -340,6 +354,10 @@ class NewgameActivity: AppCompatActivity() {
             cpureroll=0
         }
     }
+
+    /**
+     * on save and restore overridden functions to save and restore states during orientation change
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putString("currentrolltext", countTextView.text.toString())
@@ -384,10 +402,10 @@ class NewgameActivity: AppCompatActivity() {
         throwButton.text=savedInstanceState.getString("tag")
         playerwincount = savedInstanceState.getInt("playerwin")
         cpuwincount = savedInstanceState.getInt("cpuwin")
-        gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
+        gamewincount.text="P:$playerwincount / CPU:$cpuwincount"
         playertotal= savedInstanceState.getInt("playerscore")
         cputotal= savedInstanceState.getInt("cpuscore")
-        scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
+        scoreTextView.text="Score- P: $playertotal | CPU: $cputotal"
         playercurrentroll= savedInstanceState.getInt("pcurrentroll")
         countTextView.text = savedInstanceState.getString("currentrolltext")
         cpucurrentroll= savedInstanceState.getInt("ccurrentroll")
@@ -403,6 +421,10 @@ class NewgameActivity: AppCompatActivity() {
         restoredice(cpudice4,savedInstanceState.getInt("cpudice4"))
         restoredice(cpudice5,savedInstanceState.getInt("cpudice5"))
     }
+
+    /**
+     * Function used to restore the state of dices
+     */
     private fun restoredice(dice:ImageView,tag:Int){
         val drawableResource = when (tag) {
             1 -> R.drawable.dice_1
@@ -415,6 +437,10 @@ class NewgameActivity: AppCompatActivity() {
         dice.setTag(tag)
         dice.setImageResource(drawableResource)
     }
+
+    /**
+     * Functions to disable the dices and buttons
+     */
     private fun disbaledices(a:Boolean){
         dice1.isEnabled=a
         dice2.isEnabled=a
@@ -426,6 +452,10 @@ class NewgameActivity: AppCompatActivity() {
         throwButton.isEnabled=a
         scorebutton.isEnabled=a
     }
+
+    /**
+     * Function that makes all dices disappear and shows the endgame text
+     */
     private fun gameendfunc(a:Float){
         dice1.alpha=a
         dice2.alpha=a
