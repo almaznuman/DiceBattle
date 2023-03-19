@@ -339,12 +339,15 @@ class NewgameActivity: AppCompatActivity() {
     }
 
     /**
-     * advanced cpu- the cpu compares it current roll against the player's previous score and get the average per dice
+     * advanced cpu- the cpu compares it current roll against the player's previous average scores and a buffer () is added if the score is lower than 15 to give the cpu a better dice average to compete
+     * since the intial throw is considered as players current roll, we do an effiecnt reroll for the dices below 3 with hopes in minimize the dice round loss
+     * after the intial throw we compare the cpu current dice values against the average of the players previous score (with or without buffer increase)
+     * This provides a more competitive experience to the player compared to the random re-roll strategy
      */
     private fun advancecpu(){
         val Dices = setOf(cpudice1,cpudice2,cpudice3,cpudice4,cpudice5)
-        val a= attempts-1
-        if (a==0){
+        val attemptstaken= attempts-1
+        if (attemptstaken==0){
             while (cpureroll<2) {
                 for (dice in Dices) {
                     val anim = ObjectAnimator.ofFloat(dice, "rotationY", 0f, 720f)
@@ -360,12 +363,12 @@ class NewgameActivity: AppCompatActivity() {
                 cpureroll++
             }
             cpureroll=0
-        }else if(a!=0){
-            var b = previousscore/a
-            if(b<15){
-                b+=10
+        }else if(attemptstaken!=0){
+            var buffer = previousscore/attemptstaken
+            if(buffer<=15){
+                buffer+=5
             }
-            var averageofdice=b/5
+            var averageofdice=buffer/5
             while (cpureroll<2) {
                 for (dice in Dices) {
                     val anim = ObjectAnimator.ofFloat(dice, "rotationY", 0f, 720f)
