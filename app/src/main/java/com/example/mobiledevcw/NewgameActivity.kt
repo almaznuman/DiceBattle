@@ -13,7 +13,14 @@ import kotlin.random.Random
 
 @Suppress("DEPRECATION")
 class NewgameActivity: AppCompatActivity() {
+    /**
+     * button animations
+     */
     private val buttonClick = AlphaAnimation(1f, 0.8f)
+    /**
+     * Button variables, ImageView varaibles, Textview variables, boolean flags,
+     * variables to hold scores, current roll, wins, loses of player and cpu
+     */
     private lateinit var throwButton: Button
     private lateinit var cpudice1:ImageView
     private lateinit var cpudice2:ImageView
@@ -53,6 +60,12 @@ class NewgameActivity: AppCompatActivity() {
         gamemode=intent.getIntExtra("difficulty", 0)
         val number = intent.getIntExtra("number", 101)
         targetvalue=number
+
+        /**
+         *Intializing variables by assigning ID's
+         *
+         */
+
         throwButton=findViewById(R.id.throwbutton)
         dice1=findViewById(R.id.imageView)
         dice2=findViewById(R.id.imageView1)
