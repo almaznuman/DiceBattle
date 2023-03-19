@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="How the Game Works"
+        android:text="@string/how_the_game_works"
         android:textSize="25dp"
         android:textAlignment="center"
         android:textColor="@color/white" />
@@ -26,9 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15sp"
-        android:text="DiceBattle is a game that allows players to compete against the computer in a race to reach a target score by rolling and adding the sum of five dice. The game involves two sets of five dice, one set for the player and another for the computer.
-\n\nTo play, the player starts by rolling their set of five dice, and then chooses which dice to keep and which ones to re-roll. The player can roll up to three times to try and maximize their score. Once the player is satisfied with their roll, the sum of the five dice is added to their score.
-\n\nThe computer then takes its turn by rolling its own set of five dice and following the same rules. The game continues in this manner until one of the players reaches the target score first.\n\nDiceBattle is a fun and engaging app that offers a simple and easy-to-understand gameplay experience. It is a great way to pass the time and challenge oneself against a computer opponent."
+        android:text="@string/para"
         android:textAlignment="center"
         android:textColor="@color/white" />
 </LinearLayout>

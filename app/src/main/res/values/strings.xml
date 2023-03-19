@@ -8,4 +8,21 @@
     <string name="plagarism">I confirm that I understand what plagiarism is and have read and understood the section on Assessment Offences in the Essential Information for Students. The work that I have submitted is entirely my own. Any work from other authors is duly referenced and acknowledged.</string>
     <string name="throwdice">Throw</string>
     <string name="score">Score</string>
+    <string name="dicebattle">DiceBattle</string>
+    <string name="designed_by_almaz_numan">Designed by Almaz Numan</string>
+    <string name="faq">FAQ</string>
+    <string name="you_win">You Win!</string>
+    <string name="you_lose">You Lose!</string>
+    <string name="draw">Draw!</string>
+    <string name="roll_the_dices_again_to_decide_the_tie_breaker">Roll the dices again to decide the tie-breaker</string>
+    <string name="difficulty">Difficulty:</string>
+    <string name="easy">Easy</string>
+    <string name="the_computer_follows_a_random_re_roll_strategy">The Computer follows a random re-roll strategy</string>
+    <string name="hard">Hard</string>
+    <string name="the_computer_uses_an_optimised_algorithm_for_re_rolls">The Computer uses an optimised algorithm for re-rolls</string>
+    <string name="test_your_might">Test your might!</string>
+    <string name="let_s_play">Let\'s play!</string>
+    <string name="how_the_game_works">How the Game Works</string>
+    <string name="para">DiceBattle is a game that allows players to compete against the computer in a race to reach a target score by rolling and adding the sum of five dice. The game involves two sets of five dice, one set for the player and another for the computer. \n\nTo play, the player starts by rolling their set of five dice, and then chooses which dice to keep and which ones to re-roll. The player can roll up to three times to try and maximize their score. Once the player is satisfied with their roll, the sum of the five dice is added to their score. \n\nThe computer then takes its turn by rolling its own set of five dice and following the same rules. The game continues in this manner until one of the players reaches the target score first.\n\nDiceBattle is a fun and engaging app that offers a simple and easy-to-understand gameplay experience. It is a great way to pass the time and challenge oneself against a computer opponent.</string>
+    <string name="set_target_score">Set Target Score</string>
 </resources>

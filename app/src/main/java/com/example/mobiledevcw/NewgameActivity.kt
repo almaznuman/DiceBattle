@@ -50,6 +50,7 @@ class NewgameActivity: AppCompatActivity() {
     private var cpureroll=0
     private var isbuttonenabled=true
     private var isdicesenabled=true
+    private var draw=false
     private var dicevisibility=1.0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -91,24 +92,35 @@ class NewgameActivity: AppCompatActivity() {
         disablebuttons(isbuttonenabled)
         gameendfunc(dicevisibility)
 
-        throwButton.setOnClickListener {
+        throwButton.setOnClickListener(){
             disbaledices(isdicesenabled)
             it.startAnimation(buttonClick)
             throwButton.text="Re-Roll"     // changing the throwbutton text from "throw" to "re-roll"
             flagg=true                     // enabling dices to be individually selected to prevent said dice from being re-rolled
 
             rollplayerdice()               // rolls player dices
-            cpudiceroll()                  // rolls cpu dices
-            if (playerroll==3){
+            cpudiceroll() // rolls cpu dices
+            if (draw==true){
+                disbaledices(false)
+                playertotal+=playercurrentroll
+                cputotal+=cpucurrentroll
+                scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
+                playerroll=0
+                countTextView.text="Score Updated!"
+                checkwinner()
+                playercurrentroll=0
+                cpucurrentroll=0
+                throwButton.text="Throw"
+            } else if (playerroll==3){
                 disbaledices(false)//disabling dices onclick listeners
                 playertotal+=playercurrentroll
                 if (gamemode==1) { // obtained from difficulty pagee through intent
-                    randomstrategyreroll()// random re-roll strategy
+                    randomstrategyreroll()// cpu uses random re-roll strategy
                 }else {
-                    advancecpu() //
+                    advancecpu() // cpu uses an efficient algorithm for re-rolls
                 }
                 cputotal+=cpucurrentroll
-                scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
+                scoreTextView.text="Score- H: $playertotal | CPU: $cputotal" //updating scores
                 playerroll=0
                 countTextView.text="Score Updated!"
                 checkwinner()
@@ -130,6 +142,7 @@ class NewgameActivity: AppCompatActivity() {
                     advancecpu()
                 }
                 cputotal+=cpucurrentroll
+                scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
                 countTextView.text="Score Updated!"
                 checkwinner()
                 playercurrentroll=0
@@ -154,6 +167,10 @@ class NewgameActivity: AppCompatActivity() {
             selectDice(dice5)
         }
     }
+
+    /**
+     * overriding onBackPressed to use the native(androids) back button to be directed back to the main menu through intent
+     */
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -301,6 +318,8 @@ class NewgameActivity: AppCompatActivity() {
         }else if(playertotal>=targetvalue && playertotal==cputotal){
             val dialogact=Popups.newInstance(R.layout.custompopup2)
             dialogact.show(supportFragmentManager, "draw")
+            draw=true
+            scorebutton.isEnabled=false
             gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
         }
     }
@@ -351,9 +370,11 @@ class NewgameActivity: AppCompatActivity() {
         outState.putBoolean("buttonenabled",isbuttonenabled)
         outState.putBoolean("diceenabled",isdicesenabled)
         outState.putFloat("dicevisible",dicevisibility)
+        outState.putBoolean("draw",draw)
     }
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
+        draw=savedInstanceState.getBoolean("draw")
         dicevisibility=savedInstanceState.getFloat("dicevisible")
         isbuttonenabled=savedInstanceState.getBoolean("buttonenabled")
         isdicesenabled=savedInstanceState.getBoolean("diceenabled")

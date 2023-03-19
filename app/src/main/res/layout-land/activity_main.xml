@@ -41,14 +41,14 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/pill_shape"
-            android:text="FAQ"
+            android:text="@string/faq"
             app:layout_constraintStart_toEndOf="@+id/newgame" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:text="DiceBattle"
+        android:text="@string/dicebattle"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
 
     <TextView
         android:id="@+id/trademark"
-        android:text="Designed by Almaz Numan"
+        android:text="@string/designed_by_almaz_numan"
         android:textSize="12sp"
         android:textColor="@color/white"
         android:layout_width="wrap_content"

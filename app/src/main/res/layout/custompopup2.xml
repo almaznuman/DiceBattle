@@ -18,10 +18,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="sans-serif-black"
-        android:text="Draw!"
+        android:text="@string/draw"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="25dp"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
@@ -36,8 +36,8 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="35dp"
-        android:textSize="10dp"
-        android:text="Roll the dices again to decide the tie-breaker">
+        android:textSize="15sp"
+        android:text="@string/roll_the_dices_again_to_decide_the_tie_breaker">
     </TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
