@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="360dp"
-    android:layout_height="250dp"
+    android:layout_height="450dp"
     android:background="#1E1E1E"
     android:padding="5dp"
     android:layout_gravity="center"
@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Rules of the game"
+        android:text="How the Game Works"
         android:textSize="25dp"
         android:textAlignment="center"
         android:textColor="@color/white" />
@@ -26,7 +26,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15sp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        android:text="DiceBattle is a game app that allows players to compete against the computer in a race to reach a target score by rolling and adding the sum of five dice. The game involves two sets of five dice, one set for the player and another for the computer.
+\n\nTo play, the player starts by rolling their set of five dice, and then chooses which dice to keep and which ones to re-roll. The player can roll up to three times to try and maximize their score. Once the player is satisfied with their roll, the sum of the five dice is added to their score.
+\n\nThe computer then takes its turn by rolling its own set of five dice and following the same rules. The game continues in this manner until one of the players reaches the target score first.\n\nDiceBattle is a fun and engaging app that offers a simple and easy-to-understand gameplay experience. It is a great way to pass the time and challenge oneself against a computer opponent."
         android:textAlignment="center"
         android:textColor="@color/white" />
 </LinearLayout>

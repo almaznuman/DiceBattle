@@ -43,6 +43,9 @@ class NewgameActivity: AppCompatActivity() {
     private var playerroll=0
     private var gamemode=0
     private var cpureroll=0
+    private var isbuttonenabled=true
+    private var isdicesenabled=true
+    private var dicevisibility=1.0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,9 +73,12 @@ class NewgameActivity: AppCompatActivity() {
 
         scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
         gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
+        disbaledices(isdicesenabled)
+        disablebuttons(isbuttonenabled)
+        gameendfunc(dicevisibility)
 
         throwButton.setOnClickListener {
-            disbaledices(true)
+            disbaledices(isdicesenabled)
             it.startAnimation(buttonClick)
             throwButton.text="Re-Roll"
             flagg=true
@@ -88,9 +94,9 @@ class NewgameActivity: AppCompatActivity() {
                 }
                 cputotal+=cpucurrentroll
                 scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
-                checkwinner()
                 playerroll=0
                 countTextView.text="Human current Roll: $playercurrentroll"
+                checkwinner()
                 playercurrentroll=0
                 cpucurrentroll=0
                 throwButton.text="Throw"
@@ -110,8 +116,8 @@ class NewgameActivity: AppCompatActivity() {
                 }
                 cputotal+=cpucurrentroll
                 scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
-                checkwinner()
                 countTextView.text="Human current Roll: $playercurrentroll"
+                checkwinner()
                 playercurrentroll=0
                 cpucurrentroll=0
                 playerroll=0
@@ -173,8 +179,8 @@ class NewgameActivity: AppCompatActivity() {
             5 -> R.drawable.dice_5
             else -> R.drawable.dice_6
         }
-        val anim = ObjectAnimator.ofFloat(dice, "rotationY", 0f, 360f)
-        anim.duration = 500 // Set the duration of the animation in milliseconds
+        val anim = ObjectAnimator.ofFloat(dice, "rotationY", 0f, 720f)
+        anim.duration = 750
 
         dice.setTag(randomNumber)
         dice.setImageResource(drawableResource)
@@ -256,22 +262,28 @@ class NewgameActivity: AppCompatActivity() {
 
     private fun checkwinner(){
         if(playertotal>=targetvalue && playertotal>cputotal){
+            dicevisibility=0.0f
+            isbuttonenabled=false
+            isdicesenabled=false
             playerwincount++
             val dialogact=Popups.newInstance(R.layout.custompopup)
             dialogact.show(supportFragmentManager, "playerwin")
             gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
-            throwButton.isEnabled=false
-            scorebutton.isEnabled=false
-            disbaledices(false)
+            disablebuttons(isbuttonenabled)
+            disbaledices(isdicesenabled)
+            gameendfunc(dicevisibility)
         }else if(cputotal>=targetvalue && cputotal>playertotal){
+            dicevisibility=0.0f
+            isbuttonenabled=false
+            isdicesenabled=false
             gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
             cpuwincount++
             val dialogact=Popups.newInstance(R.layout.custompopup1)
             dialogact.show(supportFragmentManager, "cpuwin")
             gamewincount.text="H:$playerwincount / CPU:$cpuwincount"
-            throwButton.isEnabled=false
-            scorebutton.isEnabled=false
-            disbaledices(false)
+            disablebuttons(isbuttonenabled)
+            disbaledices(isdicesenabled)
+            gameendfunc(dicevisibility)
         }else if(playertotal>=targetvalue && playertotal==cputotal){
             val dialogact=Popups.newInstance(R.layout.custompopup2)
             dialogact.show(supportFragmentManager, "draw")
@@ -283,8 +295,8 @@ class NewgameActivity: AppCompatActivity() {
         if (cputotal<playertotal) {
             while (cpureroll < 2) {
                 for (dice in Dices) {
-                    val anim = ObjectAnimator.ofFloat(dice, "rotationY", 0f, 360f)
-                    anim.duration = 500 // Set the duration of the animation in milliseconds
+                    val anim = ObjectAnimator.ofFloat(dice, "rotationY", 0f, 720f)
+                    anim.duration = 750
                     val backgroundImageName: String = java.lang.String.valueOf(dice.getTag())
                     if (backgroundImageName.toInt() < 3) {
                         cpucurrentroll -= backgroundImageName.toInt()
@@ -300,6 +312,7 @@ class NewgameActivity: AppCompatActivity() {
     }
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        outState.putString("currentrolltext", countTextView.text.toString())
         outState.putInt("difficulty", gamemode)
         outState.putInt("playerroll", playerroll)
         outState.putInt("cpureroll", cpureroll)
@@ -321,9 +334,18 @@ class NewgameActivity: AppCompatActivity() {
         outState.putInt("cpudice3", cpudice3.getTag() as Int)
         outState.putInt("cpudice4", cpudice4.getTag() as Int)
         outState.putInt("cpudice5", cpudice5.getTag() as Int)
+        outState.putBoolean("buttonenabled",isbuttonenabled)
+        outState.putBoolean("diceenabled",isdicesenabled)
+        outState.putFloat("dicevisible",dicevisibility)
     }
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
+        dicevisibility=savedInstanceState.getFloat("dicevisible")
+        isbuttonenabled=savedInstanceState.getBoolean("buttonenabled")
+        isdicesenabled=savedInstanceState.getBoolean("diceenabled")
+        disbaledices(isdicesenabled)
+        disablebuttons(isbuttonenabled)
+        gameendfunc(dicevisibility)
         cpureroll=savedInstanceState.getInt("cpureroll")
         gamemode=savedInstanceState.getInt("difficulty")
         playerroll=savedInstanceState.getInt("playerroll")
@@ -335,7 +357,7 @@ class NewgameActivity: AppCompatActivity() {
         cputotal= savedInstanceState.getInt("cpuscore")
         scoreTextView.text="Score- H: $playertotal | CPU: $cputotal"
         playercurrentroll= savedInstanceState.getInt("pcurrentroll")
-        countTextView.text = "Human current Roll: $playercurrentroll"
+        countTextView.text = savedInstanceState.getString("currentrolltext")
         cpucurrentroll= savedInstanceState.getInt("ccurrentroll")
         targetvalue=savedInstanceState.getInt("target")
         restoredice(dice1,savedInstanceState.getInt("dice1"))
@@ -368,5 +390,25 @@ class NewgameActivity: AppCompatActivity() {
         dice3.isEnabled=a
         dice4.isEnabled=a
         dice5.isEnabled=a
+    }
+    private fun disablebuttons(a:Boolean){
+        throwButton.isEnabled=a
+        scorebutton.isEnabled=a
+    }
+    private fun gameendfunc(a:Float){
+        dice1.alpha=a
+        dice2.alpha=a
+        dice3.alpha=a
+        dice4.alpha=a
+        dice5.alpha=a
+
+        cpudice1.alpha=a
+        cpudice2.alpha=a
+        cpudice3.alpha=a
+        cpudice4.alpha=a
+        cpudice5.alpha=a
+        if (a==0.0f) {
+            countTextView.text = "The game has end, head back to the main screen"
+        }
     }
 }
