@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:fontFamily="sans-serif-black"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +32,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="20dp"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:fontFamily="sans-serif-black"
             tools:text="Score"
             android:textColor="@color/white"
@@ -46,7 +47,7 @@
             android:fontFamily="sans-serif-black"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:gravity="center_horizontal"
             android:layout_marginTop="50dp"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
@@ -76,9 +77,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif-black"
-                android:text="Human"
+                android:text="@string/player"
                 android:textColor="@color/white"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="@id/dicelayout"
                 app:layout_constraintEnd_toEndOf="@id/dicelayout"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -89,9 +90,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif-black"
-                android:text="CPU"
+                android:text="@string/cpu"
                 android:textColor="@color/white"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 app:layout_constraintEnd_toEndOf="@id/cpudicelayout"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="@id/cpudicelayout" />
@@ -113,7 +114,6 @@
                     android:layout_height="75sp"
                     android:scaleType="centerCrop"
                     android:layout_marginBottom="50dp"
-                    android:contentDescription="Dice1"
                     android:src="@drawable/empty_dice" />
 
                 <ImageView
@@ -122,7 +122,6 @@
                     android:scaleType="centerCrop"
                     android:layout_height="75sp"
                     android:layout_margin="7sp"
-                    android:contentDescription="Dice2"
                     android:src="@drawable/empty_dice"
                     app:layout_constraintTop_toBottomOf="@id/imageView" />
 
@@ -132,7 +131,6 @@
                     android:layout_height="75sp"
                     android:scaleType="centerCrop"
                     android:layout_margin="7sp"
-                    android:contentDescription="Dice3"
                     android:src="@drawable/empty_dice"
                     app:layout_constraintTop_toBottomOf="@id/imageView1" />
 
@@ -142,7 +140,6 @@
                     android:scaleType="centerCrop"
                     android:layout_height="75sp"
                     android:layout_margin="7sp"
-                    android:contentDescription="Dice4"
                     android:src="@drawable/empty_dice"
                     app:layout_constraintTop_toBottomOf="@id/imageView2" />
 
@@ -152,7 +149,6 @@
                     android:layout_width="75sp"
                     android:layout_height="75sp"
                     android:layout_margin="7sp"
-                    android:contentDescription="Dice5"
                     android:src="@drawable/empty_dice"
                     app:layout_constraintTop_toBottomOf="@id/imageView3" />
 
@@ -175,7 +171,6 @@
                     android:layout_height="75sp"
                     android:scaleType="centerCrop"
                     android:layout_marginBottom="50dp"
-                    android:contentDescription="Dice1"
                     android:src="@drawable/empty_dice" />
 
                 <ImageView
@@ -184,7 +179,6 @@
                     android:layout_height="75sp"
                     android:layout_margin="7sp"
                     android:scaleType="centerCrop"
-                    android:contentDescription="Dice2"
                     android:src="@drawable/empty_dice"
                     app:layout_constraintTop_toBottomOf="@id/cpuimageView" />
 
@@ -194,7 +188,6 @@
                     android:layout_height="75sp"
                     android:scaleType="centerCrop"
                     android:layout_margin="7sp"
-                    android:contentDescription="Dice3"
                     android:src="@drawable/empty_dice"
                     app:layout_constraintTop_toBottomOf="@id/cpuimageView1" />
 
@@ -204,7 +197,6 @@
                     android:layout_height="75sp"
                     android:scaleType="centerCrop"
                     android:layout_margin="7sp"
-                    android:contentDescription="Dice4"
                     android:src="@drawable/empty_dice"
                     app:layout_constraintTop_toBottomOf="@id/cpuimageView2" />
 
@@ -214,7 +206,6 @@
                     android:scaleType="centerCrop"
                     android:layout_height="75sp"
                     android:layout_margin="7sp"
-                    android:contentDescription="Dice5"
                     android:src="@drawable/empty_dice"
                     app:layout_constraintTop_toBottomOf="@id/cpuimageView3" />
 
@@ -240,7 +231,7 @@
                 android:fontFamily="sans-serif-black"
                 android:text="@string/throwdice"
                 android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 tools:ignore="MissingConstraints" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/scorebutton"
@@ -250,7 +241,7 @@
                 android:fontFamily="sans-serif-black"
                 android:text="@string/score"
                 android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textSize="15sp"
                 android:layout_marginStart="20dp"
                 app:layout_constraintStart_toEndOf="@id/throwbutton"
                 tools:ignore="MissingConstraints" />
@@ -265,9 +256,9 @@
             android:textColor="@color/white"
             android:layout_marginTop="20dp"
             android:fontFamily="sans-serif-medium"
-            android:textSize="15dp"
+            android:textSize="15sp"
             android:gravity="center_horizontal"
-            android:text="Dices can be indiviually selected to\nnot be re-rolled">
+            android:text="@string/dices_can_be_indiviually_selected_to_nnot_be_re_rolled">
         </TextView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

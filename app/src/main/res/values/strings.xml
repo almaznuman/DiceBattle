@@ -25,4 +25,7 @@
     <string name="how_the_game_works">How the Game Works</string>
     <string name="para">DiceBattle is a game that allows players to compete against the computer in a race to reach a target score by rolling and adding the sum of five dice. The game involves two sets of five dice, one set for the player and another for the computer. \n\nTo play, the player starts by rolling their set of five dice, and then chooses which dice to keep and which ones to re-roll. The player can roll up to three times to try and maximize their score. Once the player is satisfied with their roll, the sum of the five dice is added to their score. \n\nThe computer then takes its turn by rolling its own set of five dice and following the same rules. The game continues in this manner until one of the players reaches the target score first.\n\nDiceBattle is a fun and engaging app that offers a simple and easy-to-understand gameplay experience. It is a great way to pass the time and challenge oneself against a computer opponent.</string>
     <string name="set_target_score">Set Target Score</string>
+    <string name="player">Player</string>
+    <string name="cpu">CPU</string>
+    <string name="dices_can_be_indiviually_selected_to_nnot_be_re_rolled">Dices can be indiviually selected to\nnot be re-rolled</string>
 </resources>
