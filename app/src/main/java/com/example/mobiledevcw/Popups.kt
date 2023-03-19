@@ -11,7 +11,6 @@ import kotlin.concurrent.schedule
 class Popups// Public, no-argument constructor required by the system
     () : DialogFragment() {
     private var layoutId: Int = 0
-    private var delay: Long? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(layoutId, container, false)
     }
@@ -19,15 +18,9 @@ class Popups// Public, no-argument constructor required by the system
         super.onStart()
         val width = (resources.displayMetrics.widthPixels * 0.85).toInt()
         dialog?.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
-        if (delay != null) {
-            Timer().schedule(delay!!) {
-                dismiss()
-            }
-        }
     }
     companion object {
         private const val ARG_LAYOUT_ID = "layout_id"
-
         fun newInstance(layoutId: Int): Popups {
             val args = Bundle()
             args.putInt(ARG_LAYOUT_ID, layoutId)
