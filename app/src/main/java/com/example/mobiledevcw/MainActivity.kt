@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("player",playerscore)
             intent.putExtra("cpu",cpuscore)
             startActivity(intent)
+            finish()
         }
 
         rulesbutton.setOnClickListener {
