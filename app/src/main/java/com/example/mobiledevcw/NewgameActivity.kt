@@ -205,6 +205,8 @@ class NewgameActivity: AppCompatActivity() {
 
     /**
      * cpudiceroll function takes in an imageview and assigns it with a randomly generated dice side, the function also returns the value of the selected dice side
+     *
+     * Referenced from https://github.com/ozkayanurhuda/KotlinDiceApp- adapted diceroll functionality
      */
     private fun cpudiceroll(dice: ImageView): Int {
         val randomNumber = Random.nextInt(1,7)
